@@ -52,4 +52,28 @@ func Index(w http.ResponseWriter, r *http.Request) {
     tmpl.ExecuteTemplate(w, "Index", res)
     defer db.Close()
 }
+
+func Show(w http:ResponseWriter, r *http.Request) {
+    db := dbConn()
+    nId := r.URL.Query().Get("id")
+    selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
+    if err != nil {
+        panic(err.Error())
+    }
+    emp := Employee{}
+    for selDB.Next() {
+        var id int
+        var name, city string
+        err = selDB.Scan(&id, &name, &city)
+        if err != nil {
+            panic(err.Error())
+        }
+        emp.Id = id
+        emp.Name = name
+        emp.City = city
+    }
+    tmpl.ExecuteTemplate(w, "Show", emp)
+    defer db.Close()
+}
+
 //stopping point for tonight. tomorrow add the actual curd functionality (create, update, read, delete) or crud or whatever. try and add the routing in Go as well.
