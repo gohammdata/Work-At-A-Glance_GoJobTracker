@@ -53,7 +53,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
     defer db.Close()
 }
 
-func Show(w http:ResponseWriter, r *http.Request) {
+func Show(w http.ResponseWriter, r *http.Request) {
     db := dbConn()
     nId := r.URL.Query().Get("id")
     selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
