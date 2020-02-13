@@ -52,3 +52,4 @@ func Index(w http.ResponseWriter, r *http.Request) {
     tmpl.ExecuteTemplate(w, "Index", res)
     defer db.Close()
 }
+//stopping point for tonight. tomorrow add the actual curd functionality (create, update, read, delete) or crud or whatever. try and add the routing in Go as well.
