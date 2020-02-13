@@ -1,4 +1,3 @@
-# Job-Tracker-Project
 Constructing an internal job tracker to be run on a local TCP server.
 
 CURD interface for work tickets
