@@ -79,3 +79,12 @@ func Show(w http.ResponseWriter, r *http.Request) {
 func New(w http.ResponseWriter, r *http.Request) {
     tmpl.ExecuteTemplate(w, "New", nil)
 }
+
+func Edit(w http.ResponseWriter, r *http.Request) {
+    db := dbConn()
+    nId := r.URL.Query().Get("id")
+    selDB, err := db.Query("SELECT * FROM Employee WHERE id=?", nId)
+    if err != nil {
+        panic(err.Error())
+    }
+    
