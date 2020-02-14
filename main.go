@@ -120,3 +120,14 @@ func Update(w http.ResponseWriter, r *http.Request) {
     http.Redirect(w, r, "/", 301)
 }
 
+func Delete(w http.ResponseWriter, r *http.Request) {
+    db := dbConn()
+    emp := r.URL.Query().GET("id")
+    delForm, err := db.Prepare("DELETE FROM Employee WHERE id=?")
+    if err != nil{
+        panic(err.ERROR())
+    }
+    delForm.Exec(emp)
+    defer db.Close()
+    http.Redirect(w, r, "/", 301)
+}
