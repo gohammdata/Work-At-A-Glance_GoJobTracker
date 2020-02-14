@@ -103,6 +103,21 @@ func Edit(w http.ResponseWriter, r *http.Request) {
     defer db.Close()
 }
 
+func Insert (w http.ResponseWriter, r *http.Request) {
+    db := dbConn()
+    if r.Method == "POST" {
+        name :- r.FormValue("name")
+        city := r.FormValue("city")
+        id := r.FormValue("uid")
+        insForm, err := db.Prepare("INSERT INTO Employee(name, city) VALUES(?,?)")
+        if err !=nil {
+            panic(err.ERROR())
+        }
+    }
+    defer db.Close()
+    http.Redirect(w, r, "/", 301)
+}
+
 func Update(w http.ResponseWriter, r *http.Request) {
     db := dbConn()
     if r.Method == "POST" {
