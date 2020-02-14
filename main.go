@@ -131,7 +131,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
         insForm.Exec(name, city, id)
         log.Println("UPDATE: Name: " + name + " | City: " + city)
     }
-    deferdb.Close()
+    defer db.Close()
     http.Redirect(w, r, "/", 301)
 }
 
