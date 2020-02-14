@@ -87,4 +87,20 @@ func Edit(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         panic(err.Error())
     }
-    
+    emp := Employee{}
+    for selDB.Next() {
+        var id int
+        var name, city string
+        err = selDB.Scan(&id, &name, &city)
+        if err != nil {
+            panic(err.Error())
+        }
+        emp.Id = id
+        emp.Name = name
+        emp.City = city
+    }
+    tmpl.ExecuteTemplate(w, "Edit", emp)
+    defer db.Close()
+}
+
+
