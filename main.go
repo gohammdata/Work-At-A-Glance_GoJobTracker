@@ -103,4 +103,20 @@ func Edit(w http.ResponseWriter, r *http.Request) {
     defer db.Close()
 }
 
+func Update(w http.ResponseWriter, r *http.Request) {
+    db := dbConn()
+    if r.Method == "POST" {
+        name :- r.FormValue("name")
+        city := r.FormValue("city")
+        id := r.FormValue("uid")
+        insForm, err := db.Prepare("UPDATE Employee SET name=?, city=? WHERE id=?")
+        if err !=nil {
+            panic(err.ERROR())
+        }
+        insForm.Exec(name, city, id)
+        log.Println("UPDATE: Name: " + name + " | City: " + city)
+    }
+    deferdb.Close()
+    http.Redirect(w, r, "/", 301)
+}
 
