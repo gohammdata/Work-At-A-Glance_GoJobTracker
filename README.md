@@ -1,10 +1,9 @@
 Constructing an internal job tracker to be run on a local TCP server.<br /><br />
 
 
-A couple debugs need to be committed to run. Fixed debugs on 02/13/2020 but did not update the commits to GitHub yet.
--CURD interface for work tickets <br />
--Additional CURD abilities to upload image files within a gallery to work tickets (.jpeg, .gif, .png)<br />
--Time tracking and time stamping of work<br />
+-<i>CURD interface for work tickets</i> - <b>COMPLETE</b>
+-Additional CURD abilities to upload image files within a gallery to work tickets (.jpeg, .gif, .png) <b>Creating in seperate repo then integrating</b><br />
+-Time tracking and time stamping of work<b>Using most digital clock code from other repo</b><br />
 -User encrypted logins<br />
 -User mapping to tickets<br />
 -User profile editing<br />
