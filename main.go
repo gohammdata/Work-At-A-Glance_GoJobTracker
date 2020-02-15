@@ -6,7 +6,7 @@ import (
     "net/http"
     "text/template"
     
-    _ "github.com/go-sql-driver/mysql"
+    "github.com/go-sql-driver/mysql"
     )
 
 type Employee struct {
@@ -44,7 +44,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
         if err != nil {
             panic(err.Error())
         }
-        emp.Id = id
+        emp.ID = id
         emp.Name = name
         emp.City = city
         res = append(res, emp)
@@ -79,6 +79,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 func New(w http.ResponseWriter, r *http.Request) {
     tmpl.ExecuteTemplate(w, "New", nil)
 }
+
 func Edit(w http.ResponseWriter, r *http.Request) {
     db := dbConn()
     nId := r.URL.Query().Get("id")
@@ -101,30 +102,31 @@ func Edit(w http.ResponseWriter, r *http.Request) {
     tmpl.ExecuteTemplate(w, "Edit", emp)
     defer db.Close()
 }
+
 func Insert (w http.ResponseWriter, r *http.Request) {
     db := dbConn()
     if r.Method == "POST" {
-        name := r.FormValue("name")
+        name :- r.FormValue("name")
         city := r.FormValue("city")
+        id := r.FormValue("uid")
         insForm, err := db.Prepare("INSERT INTO Employee(name, city) VALUES(?,?)")
         if err !=nil {
-            panic(err.Error())
+            panic(err.ERROR())
         }
-        insForm.Exec(name, city)
-        log.Println("INSERT: Name: " + name + " | City: " + city)
     }
     defer db.Close()
     http.Redirect(w, r, "/", 301)
 }
+
 func Update(w http.ResponseWriter, r *http.Request) {
     db := dbConn()
     if r.Method == "POST" {
-        name := r.FormValue("name")
+        name :- r.FormValue("name")
         city := r.FormValue("city")
         id := r.FormValue("uid")
         insForm, err := db.Prepare("UPDATE Employee SET name=?, city=? WHERE id=?")
         if err !=nil {
-            panic(err.Error())
+            panic(err.ERROR())
         }
         insForm.Exec(name, city, id)
         log.Println("UPDATE: Name: " + name + " | City: " + city)
@@ -132,13 +134,13 @@ func Update(w http.ResponseWriter, r *http.Request) {
     defer db.Close()
     http.Redirect(w, r, "/", 301)
 }
-            
+
 func Delete(w http.ResponseWriter, r *http.Request) {
     db := dbConn()
-    emp := r.URL.Query().Get("id")
+    emp := r.URL.Query().GET("id")
     delForm, err := db.Prepare("DELETE FROM Employee WHERE id=?")
     if err != nil{
-        panic(err.Error())
+        panic(err.ERROR())
     }
     delForm.Exec(emp)
     defer db.Close()
@@ -151,7 +153,7 @@ func main() {
     http.HandleFunc("/show", Show)
     http.HandleFunc("/new", New)
     http.HandleFunc("/edit", Edit)
-    http.HandleFunc("/insert", Insert)
+    http.HandleFunc("/insert", insert)
     http.HandleFunc("/update", Update)
     http.HandleFunc("/delete", Delete)
     http.ListenAndServe(":8080", nil)
