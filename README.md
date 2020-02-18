@@ -1,5 +1,5 @@
 <h1>Work At A Glance</h1>
-<p>Change name to better capture the goal of the project. Want a one stop work/job tracker for all admin related info for my company</p>
+<p>Changed name to better capture the goal of the project. Want a one stop work/job tracker for all admin related info for my company</p>
 Constructing an internal job tracker to be run on a local TCP server.<br /><br />
 
 
